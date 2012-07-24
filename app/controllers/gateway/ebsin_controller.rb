@@ -20,8 +20,9 @@ class Gateway::EbsinController < Spree::BaseController
   def show
     @order   = Order.find(params[:order_id])
     @gateway = @order.available_payment_methods.find{|x| x.id == params[:gateway_id].to_i }
-    @order.payments.destroy_all
-    payment = @order.payments.create!(:amount => 0,  :payment_method_id => @gateway.id)
+
+    #@order.payments.destroy_all
+    #payment = @order.payments.create!(:amount => 0,  :payment_method_id => @gateway.id)
 
     if @order.blank? || @gateway.blank?
       flash[:error] = I18n.t("invalid_arguments")
